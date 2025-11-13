@@ -1,0 +1,87 @@
+---
+title: Scheduling
+
+description: Guide to creating and managing schedules in Stationwise for fire departments
+---
+
+## Overview
+
+You create efficient schedules in Stationwise to ensure your fire department is always staffed appropriately. The platform accounts for skills, availability, and regulations to prevent gaps. Start by defining shift patterns that match your operational needs.
+
+<Columns cols={2}>
+  <Card title="Shift Creation" icon="plus" href="#">
+    Build recurring or one-off shifts quickly. Assign to specific stations or roles.
+  </Card>
+  <Card title="Availability Management" icon="calendar" href="#">
+    View real-time availability. Automatically suggest assignments to fill openings.
+  </Card>
+</Columns>
+
+<Steps>
+  <Step title="Define Shift Types" icon="settings">
+    Navigate to the Scheduling module. Set durations, like 24-hour shifts, and required certifications.
+  </Step>
+  <Step title="Assign Personnel" icon="users">
+    Drag firefighters to shifts on the calendar view. The system flags conflicts, such as overtime limits.
+    
+````bash
+stationwise schedule assign --shift-id 123 --user-id 456 --station firehouse-1
+````
+  </Step>
+  <Step title="Review and Publish" icon="check-circle">
+    Preview the schedule for balance. Publish to notify all staff via email and app.
+  </Step>
+</Steps>
+
+<Callout kind="tip">
+Enable auto-fill to let the algorithm optimize assignments based on preferences and fairness.
+</Callout>
+
+<Tabs>
+  <Tab title="Calendar View" icon="calendar">
+    Use the drag-and-drop interface to adjust shifts. Filter by station to focus on one location.
+    
+````javascript
+const scheduleData = {
+  shifts: [
+    { id: 1, start: '2024-01-01T08:00', end: '2024-01-02T08:00', assignee: 'John Doe' }
+  ]
+};
+console.log('Schedule updated:', scheduleData);
+````
+  </Tab>
+  <Tab title="List View" icon="list">
+    See shifts in tabular format for printing. Export to PDF for briefing meetings.
+  </Tab>
+</Tabs>
+
+<ExpandableGroup>
+  <Expandable title="Handling Conflicts">
+    When overlaps occur, Stationwise highlights them. You resolve by reassigning or requesting volunteers.
+  </Expandable>
+  <Expandable title="Fairness Rules">
+    Configure rules to rotate undesirable shifts. Track metrics to ensure equity across the team.
+  </Expandable>
+</ExpandableGroup>
+
+You integrate scheduling with training calendars to avoid conflicts during drills. The platform predicts staffing needs based on historical call volumes. Generate what-if scenarios to test coverage under different conditions.
+
+For multi-station departments, you view aggregated schedules. Set global rules, like maximum consecutive shifts, to comply with NFPA standards. Firefighters access their schedules via the app, requesting swaps that route to supervisors.
+
+<CodeGroup tabs="API,CLI">
+  ```javascript
+  // Fetch upcoming shifts
+  fetch('/api/schedules/upcoming', {
+    method: 'GET',
+    headers: { 'Authorization': `Bearer ${accessToken}` }
+  }).then(res => res.json()).then(data => {
+    updateCalendar(data);
+  });
+  ```
+  ```bash
+  # Create a new shift via CLI
+  stationwise shifts create --start "2024-10-20T08:00" --end "2024-10-21T08:00" --role captain --station central
+  ```
+</CodeGroup>
+
+Stationwise's scheduling reduces manual errors and improves response readiness. You monitor adherence with dashboards showing fill rates. Adjust in real-time for emergencies, ensuring your department stays operational. (Word count: 312)

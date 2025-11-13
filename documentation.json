@@ -1,0 +1,82 @@
+{
+  "name": "Stationwise Documentation",
+  "initialRoute": "introduction",
+  "colors": {
+    "light": {
+      "brand": "#0c141c"
+    },
+    "dark": {
+      "brand": "#0c141c"
+    }
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "icon": "book",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "icon": "rocket",
+            "pages": [
+              {
+                "title": "Introduction",
+                "path": "introduction",
+                "icon": "home"
+              }
+            ]
+          },
+          {
+            "group": "Core Features",
+            "icon": "settings",
+            "pages": [
+              {
+                "title": "Scheduling",
+                "path": "scheduling",
+                "icon": "calendar"
+              },
+              {
+                "title": "Time Tracking",
+                "path": "time-tracking",
+                "icon": "clock"
+              }
+            ]
+          },
+          {
+            "group": "Integrations",
+            "icon": "plug",
+            "pages": [
+              {
+                "title": "Connect Tools",
+                "path": "integrations",
+                "icon": "link"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "icon": "code",
+        "groups": [
+          {
+            "group": "Endpoints",
+            "openapi": "openapi.yaml",
+            "icon": "terminal"
+          }
+        ]
+      },
+      {
+        "tab": "Changelog",
+        "icon": "clock",
+        "pages": [
+          {
+            "title": "Release History",
+            "path": "changelog",
+            "icon": "history"
+          }
+        ]
+      }
+    ]
+  }
+}

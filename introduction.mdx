@@ -1,0 +1,89 @@
+---
+title: Introduction
+description: Overview of Stationwise and its core capabilities for fire department staffing
+---
+
+## Getting Started
+
+Stationwise simplifies staffing for fire departments by automating scheduling, tracking time, and enhancing communication. You manage shifts, assign personnel, and ensure compliance with minimal effort. Access the platform via web or mobile to optimize your operations today.
+
+<Columns cols={3}>
+  <Card title="Efficient Scheduling" icon="calendar" href="/scheduling">
+    Create and manage shift schedules effortlessly. Assign firefighters to stations based on availability and skills.
+  </Card>
+  <Card title="Accurate Time Tracking" icon="clock" href="/time-tracking">
+    Monitor hours worked and overtime with precision. Generate reports for payroll and compliance.
+  </Card>
+  <Card title="Seamless Communication" icon="message-square" href="/integrations">
+    Integrate with tools like email and dispatch systems. Keep your team informed in real-time.
+  </Card>
+</Columns>
+
+<Steps>
+  <Step title="Sign Up" icon="user">
+    Create your account on the Stationwise dashboard. Provide department details to get started.
+  </Step>
+  <Step title="Import Data" icon="upload">
+    Upload your current roster and shift templates. The system processes CSV files for quick setup.
+    
+````javascript
+import Papa from 'papaparse';
+
+Papa.parse(csvFile, {
+  header: true,
+  complete: function(results) {
+    console.log('Imported employees:', results.data);
+  }
+});
+````
+  </Step>
+  <Step title="Configure Settings" icon="settings">
+    Set up stations, roles, and notification preferences. Customize alerts for shift changes.
+  </Step>
+</Steps>
+
+<Callout kind="info">
+You receive email confirmations for all major actions, ensuring nothing is missed.
+</Callout>
+
+<Tabs>
+  <Tab title="Web Access" icon="globe">
+    Log in at stationwise.com using your credentials. The interface supports drag-and-drop for schedules. Use filters to view by station or shift type.
+  </Tab>
+  <Tab title="Mobile App" icon="smartphone">
+    Download from app stores for iOS or Android. Approve shifts on the go and receive push notifications for emergencies.
+  </Tab>
+</Tabs>
+
+<ExpandableGroup>
+  <Expandable title="What is Stationwise?" default-open="true">
+    Stationwise is a SaaS platform tailored for fire departments. It handles everything from roster management to regulatory reporting, saving hours weekly.
+  </Expandable>
+  <Expandable title="Key Benefits">
+    Reduce administrative burden by 50%. Improve response times through better staffing visibility. Ensure fair shift distribution to prevent burnout among firefighters.
+  </Expandable>
+</ExpandableGroup>
+
+Stationwise integrates with existing fire department systems, allowing you to pull data from CAD software or HR tools. You start by defining your stations and personnel hierarchies. The dashboard provides an overview of upcoming shifts, vacancies, and overtime projections. Use the search function to find available staff quickly during recalls.
+
+For compliance, Stationwise tracks training certifications and ensures shifts align with labor laws. You generate audit-ready reports with one click. The platform supports multi-station departments, scaling from small volunteer units to large urban services.
+
+<CodeGroup tabs="JavaScript,Python">
+  ```javascript
+  // Example API call to fetch schedules
+const response = await fetch('/api/schedules', {
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
+  const schedules = await response.json();
+  console.log(schedules);
+  ```
+  ```python
+import requests
+
+response = requests.get('/api/schedules', headers={'Authorization': f'Bearer {token}'})
+schedules = response.json()
+print(schedules)
+  ```
+</CodeGroup>
+
+You customize notifications for shift approvals or conflicts. The mobile app lets firefighters swap shifts directly, with chief approval. Overall, Stationwise empowers you to focus on emergency response rather than paperwork. (Word count: 428)

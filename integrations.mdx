@@ -1,0 +1,107 @@
+---
+title: Integrations
+description: Connect Stationwise with other tools for enhanced fire department operations
+---
+
+## Overview
+
+You integrate Stationwise with dispatch, HR, and communication systems to create a unified workflow. This eliminates silos and ensures data flows seamlessly across your fire department. Start by configuring connections in the Integrations dashboard.
+
+<Columns cols={2}>
+  <Card title="Dispatch Systems" icon="radio" href="#">
+    Sync calls with scheduling for real-time adjustments. Pull incident data automatically.
+  </Card>
+  <Card title="HR Platforms" icon="users" href="#">
+    Import employee records and certifications. Update statuses bidirectionally.
+  </Card>
+</Columns>
+
+<Steps>
+  <Step title="Choose Integrations" icon="plug">
+    Browse the marketplace for supported apps like CAD or email services.
+  </Step>
+  <Step title="Authenticate" icon="key">
+    Use OAuth or API keys to connect. Test the link to verify data exchange.
+    
+````javascript
+// Example webhook setup
+const webhook = {
+  url: 'https://stationwise.com/webhooks/incoming',
+  events: ['shift-assigned', 'time-logged'],
+  secret: 'your-secret-key'
+};
+
+fetch('/api/integrations/webhook', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(webhook)
+});
+````
+  </Step>
+  <Step title="Map Data Fields" icon="settings">
+    Align fields, like employee IDs, for accurate syncing. Set sync frequency.
+  </Step>
+</Steps>
+
+<Callout kind="alert">
+Review permissions before connecting to protect sensitive personnel data.
+</Callout>
+
+<Tabs>
+  <Tab title="Webhooks" icon="zap">
+    Receive real-time updates from external systems. Handle events like new incidents.
+    
+````python
+# Process incoming webhook
+import flask
+
+@app.route('/webhook', methods=['POST'])
+def handle_webhook():
+    data = request.json
+    if data['event'] == 'incident':
+        update_schedule(data['details'])
+    return 'OK', 200
+````
+  </Tab>
+  <Tab title="API Access" icon="code">
+    Use REST endpoints to push/pull data. Rate limits apply to prevent overload.
+  </Tab>
+</Tabs>
+
+<ExpandableGroup>
+  <Expandable title="Popular Integrations">
+    Connect to Motorola Solutions for dispatch or BambooHR for payroll. Custom webhooks for unique needs.
+  </Expandable>
+  <Expandable title="Security Best Practices">
+    Use HTTPS and token rotation. Log all sync activities for auditing.
+  </Expandable>
+</ExpandableGroup>
+
+You monitor integration health via status indicators. Troubleshoot failed syncs with detailed logs. For custom setups, the API supports webhooks for events like shift changes.
+
+Extend functionality by integrating with calendar apps for personal schedules. Ensure compliance by syncing training records to certification databases. The platform handles conflicts, like duplicate entries, automatically.
+
+<CodeGroup tabs="cURL,Node.js">
+  ```bash
+  # Sync employee data
+  curl -X POST https://api.stationwise.com/v1/employees/sync \
+    -H "Authorization: Bearer your_token" \
+    -H "Content-Type: application/json" \
+    -d '{"external_id": "emp-123", "status": "active"}'
+  ```
+  ```javascript
+  // Node.js example for integration
+const axios = require('axios');
+
+axios.post('https://api.stationwise.com/v1/events', {
+  type: 'shift-update',
+  payload: { shiftId: 456, assignee: 'Jane Smith' }
+}, {
+  headers: { Authorization: `Bearer ${token}` }
+}).then(response => {
+  console.log('Integrated:', response.data);
+});
+  ```
+</CodeGroup>
+
+Integrations make Stationwise the hub of your operations. You save time on manual updates and improve accuracy across systems. Scale connections as your department grows. (Word count: 298)

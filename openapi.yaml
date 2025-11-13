@@ -1,0 +1,155 @@
+openapi: '3.0.0'
+info:
+  version: 1.0.0
+  title: Stationwise API
+  license:
+    name: MIT
+servers:
+  - url: https://api.stationwise.com/v1
+paths:
+  /schedules:
+    get:
+      summary: List all schedules
+      operationId: listSchedules
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: A paged array of schedules
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedules'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a schedule
+      operationId: createSchedules
+      responses:
+        '201':
+          description: Null response
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /schedules/{scheduleId}:
+    get:
+      summary: Info for a specific schedule
+      operationId: showScheduleById
+      parameters:
+        - name: scheduleId
+          in: path
+          required: true
+          description: The id of the schedule to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedules'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /employees:
+    get:
+      summary: List all employees
+      operationId: listEmployees
+      parameters:
+        - name: station
+          in: query
+          description: Filter by fire station
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A paged array of employees
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employees'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create an employee
+      operationId: createEmployees
+      responses:
+        '201':
+          description: Null response
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Schedule:
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        station:
+          type: string
+    Schedules:
+      type: array
+      items:
+        $ref: '#/components/schemas/Schedule'
+    Employee:
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        role:
+          type: string
+    Employees:
+      type: array
+      items:
+        $ref: '#/components/schemas/Employee'
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string

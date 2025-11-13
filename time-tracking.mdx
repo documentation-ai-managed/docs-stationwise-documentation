@@ -1,0 +1,102 @@
+---
+title: Time Tracking
+description: How to track and report time in Stationwise for accurate payroll and compliance
+---
+
+## Overview
+
+You track time in Stationwise to capture every hour firefighters spend on duty accurately. The system logs arrivals, departures, and activities automatically. Use this data for payroll, compliance reports, and performance analysis.
+
+<Columns cols={3}>
+  <Card title="Clock In/Out" icon="clock" href="#">
+    Simple mobile check-in for shifts. GPS verifies location at stations.
+  </Card>
+  <Card title="Activity Logging" icon="edit" href="#">
+    Record training, maintenance, or calls. Categorize for detailed reporting.
+  </Card>
+  <Card title="Overtime Alerts" icon="alert-circle" href="#">
+    Get notifications when limits approach. Prevent unauthorized extensions.
+  </Card>
+</Columns>
+
+<Steps>
+  <Step title="Set Up Tracking" icon="settings">
+    Enable time tracking in department settings. Define pay codes for different activities.
+  </Step>
+  <Step title="Daily Logging" icon="check">
+    Firefighters clock in via app or kiosk. Log breaks and special duties.
+    
+````javascript
+// Log time entry via API
+const logTime = async (userId, event) => {
+  const response = await fetch('/api/time/entries', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+    body: JSON.stringify({ userId, event, timestamp: new Date() })
+  });
+  return response.json();
+};
+logTime(123, 'clock-in');
+````
+  </Step>
+  <Step title="Generate Reports" icon="file-text">
+    Pull weekly or monthly summaries. Export to CSV for accounting software.
+  </Step>
+</Steps>
+
+<Callout kind="success">
+All entries are tamper-proof, with audit trails for verification.
+</Callout>
+
+<Tabs>
+  <Tab title="Mobile Tracking" icon="smartphone">
+    Use the app to scan QR codes at stations. Track travel time between incidents.
+  </Tab>
+  <Tab title="Admin Dashboard" icon="monitor">
+    Review submissions for approval. Adjust entries if needed with notes.
+    
+````python
+import requests
+
+# Approve time entry
+response = requests.patch(
+  '/api/time/entries/789',
+  headers={'Authorization': f'Bearer {token}'},
+  json={'status': 'approved', 'notes': 'Verified by chief'}
+)
+print(response.status_code)
+````
+  </Tab>
+</Tabs>
+
+<ExpandableGroup>
+  <Expandable title="Compliance Features">
+    Stationwise aligns with FLSA and state laws. Automatically calculate comp time.
+  </Expandable>
+  <Expandable title="Integration with Payroll">
+    Sync data to systems like ADP. Map codes for seamless transfer.
+  </Expandable>
+</ExpandableGroup>
+
+You view timelines of daily activities to spot patterns. The platform flags discrepancies, like unlogged overtime. For volunteers, track on-call hours separately. Generate certifications for grant funding based on tracked training time.
+
+Supervisors approve entries weekly, ensuring accuracy. Dashboards show department-wide metrics, such as average response times correlated with staffing levels. You customize alerts for nearing budget thresholds on overtime.
+
+<CodeGroup tabs="JavaScript,SQL">
+  ```javascript
+  // Query time entries
+  const entries = await fetch('/api/time/entries?userId=123&date=2024-10-20', {
+    headers: { 'Authorization': `Bearer ${token}` }
+  }).then(res => res.json());
+  console.log('Entries:', entries);
+  ```
+  ```sql
+  -- Example query for reports
+  SELECT user_id, SUM(hours) as total_hours
+  FROM time_entries
+  WHERE date >= '2024-10-01' AND status = 'approved'
+  GROUP BY user_id;
+  ```
+</CodeGroup>
+
+Time tracking in Stationwise ensures fair compensation and operational insights. You reduce disputes with transparent logs. Scale for large departments by segmenting reports by station. (Word count: 356)
