@@ -78,5 +78,8 @@
         ]
       }
     ]
-  }
+  },
+  "logo-dark": "https://blob-cdn.documentation.ai/org-fbade7fa-1991-40eb-b62f-d88ba8f44101/doc-8f22197d-85d4-46c1-87c0-83238fdcf07a/1763072807791-o8n4q60827n-Linkedin-logo.png",
+  "logo-light": "https://blob-cdn.documentation.ai/org-fbade7fa-1991-40eb-b62f-d88ba8f44101/doc-8f22197d-85d4-46c1-87c0-83238fdcf07a/1763072814515-m39yu59p41-Symbol-light.png",
+  "favicon": "https://blob-cdn.documentation.ai/org-fbade7fa-1991-40eb-b62f-d88ba8f44101/doc-8f22197d-85d4-46c1-87c0-83238fdcf07a/1763072807791-o8n4q60827n-Linkedin-logo.png"
 }
